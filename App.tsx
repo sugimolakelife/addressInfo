@@ -19,9 +19,8 @@ const apiBaseURL = "https://zipcloud.ibsnet.co.jp/api/search";
 export default function App() {
 
   const[zipCode,setZipCode] = useState<string>("");
-  const[address,setAddress]=useState([]);
+  const [addresses, setAddresses] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-
   
   
     //ボタンプッシュ
@@ -34,7 +33,7 @@ export default function App() {
       if (newAddress === null) {
         alert("読み込み失敗");
       } else {
-        setAddress(newAddress);
+        setAddresses(newAddress);
       }
     }catch(error){
       alert(error);
@@ -69,9 +68,9 @@ export default function App() {
   const listContainerView = (
     <View>
       <FlatList
-        data={address}
+        data={addresses}
         renderItem={renderAddressItem}
-        keyExtractor={(item, index: any) => index}
+        keyExtractor={(item, index: any) => `${index}`}
       />
     </View>
   );
